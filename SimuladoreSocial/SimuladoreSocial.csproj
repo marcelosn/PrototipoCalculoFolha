@@ -6,10 +6,62 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
+    <PackageReference Include="Microsoft.jQuery.Unobtrusive.Ajax" Version="3.2.6" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.2" />
   </ItemGroup>
 
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Content\Fonts\fontawesome-webfont.eot" />
+    <None Include="wwwroot\Content\Fonts\fontawesome-webfont.svg" />
+    <None Include="wwwroot\Content\Fonts\fontawesome-webfont.ttf" />
+    <None Include="wwwroot\Content\Fonts\fontawesome-webfont.woff" />
+    <None Include="wwwroot\Content\Fonts\FontAwesome.otf" />
+    <None Include="wwwroot\Content\Fonts\glyphicons-halflings-regular.woff" />
+    <None Include="wwwroot\Content\Fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="wwwroot\Content\JavaScript\bootstrap.js" />
+    <None Include="wwwroot\Content\JavaScript\gmaps.js" />
+    <None Include="wwwroot\Content\JavaScript\graph.js" />
+    <None Include="wwwroot\Content\JavaScript\jquery-ui.min.js" />
+    <None Include="wwwroot\Content\JavaScript\jquery.basictable.min.js" />
+    <None Include="wwwroot\Content\JavaScript\jquery.cookie.js" />
+    <None Include="wwwroot\Content\JavaScript\jquery.countdown.min.js" />
+    <None Include="wwwroot\Content\JavaScript\jquery.geocomplete.js" />
+    <None Include="wwwroot\Content\JavaScript\jquery.min.js" />
+    <None Include="wwwroot\Content\JavaScript\jquery.vmap.js" />
+    <None Include="wwwroot\Content\JavaScript\jquery.vmap.sampledata.js" />
+    <None Include="wwwroot\Content\JavaScript\jquery.vmap.world.js" />
+    <None Include="wwwroot\Content\JavaScript\logger.js" />
+    <None Include="wwwroot\Content\JavaScript\lsb.js" />
+    <None Include="wwwroot\Content\JavaScript\modernizr.js" />
+    <None Include="wwwroot\Content\JavaScript\monthly.js" />
+    <None Include="wwwroot\Content\JavaScript\morris.js" />
+    <None Include="wwwroot\Content\JavaScript\proton.js" />
+    <None Include="wwwroot\Content\JavaScript\raphael-min.js" />
+    <None Include="wwwroot\Content\JavaScript\screenfull.js" />
+    <None Include="wwwroot\Content\JavaScript\skycons.js" />
+    <None Include="wwwroot\Content\JavaScript\valida.2.1.6.min.js" />
+    <None Include="wwwroot\Content\JavaScript\validator.min.js" />
+    <None Include="wwwroot\Content\Style\aaf5c053.proton.css" />
+    <None Include="wwwroot\Content\Style\basictable.css" />
+    <None Include="wwwroot\Content\Style\bootstrap.css" />
+    <None Include="wwwroot\Content\Style\examples.css" />
+    <None Include="wwwroot\Content\Style\font-awesome.css" />
+    <None Include="wwwroot\Content\Style\font.css" />
+    <None Include="wwwroot\Content\Style\ladda.min.css" />
+    <None Include="wwwroot\Content\Style\lsb.css" />
+    <None Include="wwwroot\Content\Style\monthly.css" />
+    <None Include="wwwroot\Content\Style\morris.css" />
+    <None Include="wwwroot\Content\Style\style.css" />
+    <None Include="wwwroot\Content\Style\table-style.css" />
+    <None Include="wwwroot\Content\Style\typo.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RegraNegocio\RegraNegocio.csproj" />
   </ItemGroup>
 
 </Project>

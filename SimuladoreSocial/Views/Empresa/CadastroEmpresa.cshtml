@@ -1,0 +1,383 @@
+﻿@using SimuladoreSocial.Models.Empresas;
+<!--Tag-->
+<div class="banner">
+    <h2>
+        <a href="~/Home/Index">Home</a>
+        <i class="fa fa-angle-right"></i>
+        <span>Empresas</span>
+        <i class="fa fa-angle-right"></i>
+        <span>Cadastro de empresas</span>
+    </h2>
+</div>
+
+<!-- validation -->
+<div class="blank">
+    <div class="grids">
+        <div class="forms-grids">
+            <div class="w3agile-validation">
+                <div class="panel panel-widget agile-validation">
+                    <div class="my-div">
+                        @using (Html.BeginForm("CadastrarEmpresa", "Empresa", FormMethod.Post, new { id = "formEmpresa" }))
+                        {
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a data-toggle="tab" href="#Cadastrais"> Cadastrais</a></li>
+                                        <li><a data-toggle="tab" href="#tributacao"> Tributação</a></li>
+                                        <li><a data-toggle="tab" href="#parametros"> Parâmetros de calculo</a></li>
+                                    </ul>
+                                    <hr>
+                                </div>
+                            </div>
+
+                            <div class="tab-content">
+                                <div id="Cadastrais" class="tab-pane fade in active">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-3">
+                                            <label for="field-1-2">Tipo de estabelecimento</label>
+                                            <div class="form-group">
+                                                <div class="radio-inline">
+                                                    @Html.RadioButton("empresa.Inscricao", "CNPJ", new { id = "inscricaoCNPJ" }) CNPJ
+                                                </div>
+
+                                                <div class="radio-inline">
+                                                    @Html.RadioButton("empresa.Inscricao", "CEI", new { id = "inscricaoCEI" }) CEI
+                                                </div>
+
+                                                <div class="radio-inline">
+                                                    @Html.RadioButton("empresa.Inscricao", "CPF", new { id = "inscricaoCPF" }) CPF
+                                                </div>
+                                            </div>
+                                            <hr>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-3">
+                                            <label for="field-1-2">Inscrição</label>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon efeitoButton"><span class="AbreModal"><i class="fa fa-search" aria-hidden="true"></i></span></div>
+                                                    <input type="text" name="empresa.Inscricao" id="inputCNPJ" filter="email" class="form-control" required="true" data-invalid="Tipo Inscricão Inválida">
+                                                </div>
+                                                <hr>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-xs-12 col-sm-4">
+                                            <label for="field-1-2">Inscrição Estadual</label>
+                                            <div class="form-group">
+                                                <input type="text" name="inscricaoEstadual" id="inputInscricaoEstadual" filter="email|matches:field-1-4-1" class="form-control" required="true" data-invalid="Must be a valid email address and match field 1.4.1's value">
+                                            </div>
+                                            <hr>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-2">
+                                            <label for="Porte">Situação da empresa<span class="at-required-highlight"></span></label>
+                                            <div class="form-group">
+                                                @Html.DropDownList("empresa.Situacao", Html.GetEnumSelectList<SituacaoEmpresa>(), "Escolha", new { @class = "form-control" })
+                                            </div>
+                                            <hr>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-10">
+                                            <label for="RazaoSocial">Razão Social&nbsp;<span class="at-required-highlight"> *</span></label>
+                                            <div class="form-group">
+                                                <input type="text" name="empresa.RazaoSocial" id="field-1" required="true" class="form-control">
+                                            </div>
+
+                                            <hr>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-2">
+                                            <label for="dataAbertura">Data de abertura</label>
+                                            <div class="form-group">
+                                                <input type="text" name="empresa.DataAbertura" id="field-1-2" filter="date" class="form-control" data-invalid="Given value must be a valid date formated as 0000-00-00">
+                                            </div>
+                                            <hr>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-10">
+                                            <label for="NomeFantasia">Nome Fantasia</label>
+                                            <div class="form-group">
+                                                <input type="text" name="empresa.NomeFantasia" id="field-1-2" filter="date" class="form-control" data-invalid="Given value must be a valid date formated as 0000-00-00">
+                                            </div>
+                                            <hr>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-2">
+                                            <label for="Porte">Enquadramento Federal<span class="at-required-highlight"></span></label>
+                                            <div class="form-group">
+                                                @Html.DropDownList("empresa.Porte", Html.GetEnumSelectList<PorteEmpresa>(), "Escolha", new { @class = "form-control" })
+                                            </div>
+                                            <hr>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-3">
+                                            <label for="field-1-2">Empresa Matriz</label>
+                                            <div class="form-group">
+                                                <div class="radio-inline">
+                                                    @Html.RadioButton("empresa.EmpresaMatriz", true, new { id = "opcaoMatriz" }) Matriz
+                                                </div>
+
+                                                <div class="radio-inline">
+                                                    @Html.RadioButton("empresa.EmpresaMatriz", false, new { id = "opcaoFilial" }) Filial
+                                                </div>
+                                            </div>
+                                            <hr>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-3">
+                                            <label for="field-1-2">Código empresa matriz</label>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon AbreModalCondicao"><span><i class="fa fa-search" aria-hidden="true"></i></span></div>
+                                                    <input type="text" name="empresa.MatrizID" id="field-1-4-1" filter="email" class="form-control campoLeitura" required="true" data-invalid="CNPJ Inesxistente">
+                                                </div>
+                                                <hr>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-6">
+                                            <label for="field-1-2">Nome empresa Matriz</label>
+                                            <div class="form-group">
+                                                <input type="text" name="field-1-4-1" id="field-1-4-1" filter="email" class="form-control campoLeitura" required="true" data-invalid="CNPJ Inesxistente">
+                                            </div>
+                                            <hr>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="tributacao" class="tab-pane fade">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-3">
+                                            <label for="field-1-2">Optante simples nacional</label>
+                                            <div class="form-group">
+                                                <div class="radio-inline">
+                                                    @Html.RadioButton("empresa.OptanteSimplesNacional", true, new { id = "simplesNacioalOptante" }) Optante
+                                                </div>
+
+                                                <div class="radio-inline">
+                                                    @Html.RadioButton("empresa.OptanteSimplesNacional", false, new { id = "simplesNacioalNaoOptante" }) Não Optante
+                                                </div>
+                                            </div>
+                                            <hr>
+                                        </div>
+                                        <!---->
+                                        <div class="col-xs-12 col-sm-3">
+                                            <label for="field-1-2">Código terceiros</label>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon efeitoButton"><span class="AbreModal"><i class="fa fa-search" aria-hidden="true"></i></span></div>
+                                                    <input type="text" name="empresa.CodigoTerceirosID" id="CodigoTerceiros" filter="email" class="form-control" required="true" data-invalid="Tipo Inscricão Inválida">
+                                                </div>
+                                                <hr>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-6">
+                                            <label for="field-1-2">Descrição código terceiros</label>
+                                            <div class="form-group">
+                                                <input type="text" name="field-1-4-1" id="field-1-4-1" filter="email" class="form-control campoLeitura" required="true" data-invalid="CNPJ Inesxistente">
+                                            </div>
+                                            <hr>
+                                        </div>
+                                    </div>
+                                    <!---->
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-3">
+                                            <label for="field-1-2">20% Patronal</label>
+                                            <div class="form-group">
+                                                <div class="radio-inline">
+                                                    @Html.RadioButton("empresa.PagaPercetualEmpregadores", true, new { id = "PagaPercetualEmpregadoresPaga" }) Optante
+                                                </div>
+
+                                                <div class="radio-inline">
+                                                    @Html.RadioButton("empresa.PagaPercetualEmpregadores", false, new { id = "PagaPercetualEmpregadoresNaoPaga" }) Não Optante
+                                                </div>
+                                            </div>
+                                            <hr>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-3">
+                                            <label for="field-1-2">Código FPAS</label>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon efeitoButton"><span class="AbreModal"><i class="fa fa-search" aria-hidden="true"></i></span></div>
+                                                    <input type="text" name="empresa.CodigoFpasID" id="CodigoTerceiros" filter="email" class="form-control" required="true" data-invalid="Tipo Inscricão Inválida">
+                                                </div>
+                                                <hr>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-6">
+                                            <label for="field-1-2">Descrição código FPAS</label>
+                                            <div class="form-group">
+                                                <input type="text" name="field-1-4-1" id="field-1-4-1" filter="email" class="form-control campoLeitura" required="true" data-invalid="CNPJ Inesxistente">
+                                            </div>
+                                            <hr>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-3">
+                                            <label for="field-1-2">Classificação Tributária</label>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon efeitoButton"><span class="AbreModal"><i class="fa fa-search" aria-hidden="true"></i></span></div>
+                                                    <input type="text" name="empresa.Classificacao" id="inscricao" filter="email" class="form-control" required="true" data-invalid="Tipo Inscricão Inválida">
+                                                </div>
+                                                <hr>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-xs-12 col-sm-6">
+                                            <label for="field-1-2">Descrição Classificação</label>
+                                            <div class="form-group">
+                                                <input type="text" name="classificacao" id="inputClassificacao" filter="email|matches:field-1-4-1" class="form-control campoLeitura" required="true" data-invalid="Must be a valid email address and match field 1.4.1's value">
+                                            </div>
+                                            <hr>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-1">
+                                            <label for="field-1-2">% FPAS</label>
+                                            <div class="form-group">
+                                                <input type="text" name="empresa.FPASPercentual" id="percentualFPAS" filter="email" class="form-control" required="true" data-invalid="Tipo Inscricão Inválida">
+                                            </div>
+                                            <hr>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-1">
+                                            <label for="field-1-2">% RAT</label>
+                                            <div class="form-group">
+                                                <input type="text" name="empresa.RAT" id="percentualRAT" filter="email" class="form-control" required="true" data-invalid="Tipo Inscricão Inválida">
+                                            </div>
+                                            <hr>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-1">
+                                            <label for="field-1-2">% FAP</label>
+                                            <div class="form-group">
+                                                <input type="text" name="empresa.AliquotaFAP" id="percentualFAP" filter="email" class="form-control" required="true" data-invalid="Tipo Inscricão Inválida">
+                                            </div>
+                                            <hr>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-3">
+                                            <label for="field-1-2">Lotação Tributária</label>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon efeitoButton"><span class="AbreModal"><i class="fa fa-search" aria-hidden="true"></i></span></div>
+                                                    <input type="text" name="empresa.Classificacao" id="inscricao" filter="email" class="form-control" required="true" data-invalid="Tipo Inscricão Inválida">
+                                                </div>
+                                                <hr>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-xs-12 col-sm-6">
+                                            <label for="field-1-2">Descrição Classificação</label>
+                                            <div class="form-group">
+                                                <input type="text" name="classificacao" id="inputClassificacao" filter="email|matches:field-1-4-1" class="form-control campoLeitura" required="true" data-invalid="Must be a valid email address and match field 1.4.1's value">
+                                            </div>
+                                            <hr>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-3">
+                                            <label for="Porte">Situação da empresa<span class="at-required-highlight"></span></label>
+                                            <div class="form-group">
+                                                @Html.DropDownList("empresa.ESocial", Html.GetEnumSelectList<SituacaoESocial>(), "Escolha", new { @class = "form-control" })
+                                            </div>
+                                            <hr>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-3">
+                                            <label for="Cnae">Código CNAE</label>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon efeitoButton"><span class="AbreModal"><i class="fa fa-search" aria-hidden="true"></i></span></div>
+                                                    <input type="text" name="empresa.Cnae" id="field-1-4-1" filter="email" class="form-control" required="true" data-invalid="CNPJ Inesxistente">
+                                                </div>
+                                            </div>
+                                            <hr>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-9">
+                                            <label for="field-1-2">Descrição da Atividade Economica Principal</label>
+                                            <div class="form-group">
+                                                <input type="text" name="field-1-4-1" id="field-1-4-1" filter="email" class="form-control campoLeitura" required="true" data-invalid="CNPJ Inesxistente">
+                                                <hr>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-3">
+                                            <label for="field-1-2">Código NJ</label>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon efeitoButton"><span class="AbreModal"><i class="fa fa-search" aria-hidden="true"></i></span></div>
+                                                    <input type="text" name="empresa.NaturezaJuridica" id="field-1-4-1" filter="email" class="form-control" required="true" data-invalid="CNPJ Inesxistente">
+                                                </div>
+                                            </div>
+                                            <hr>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-9">
+                                            <label for="field-1-2">Descrição da Natureza Juridica</label>
+                                            <div class="form-group">
+                                                <input type="text" name="field-1-4-1" id="field-1-4-1" filter="email" class="form-control campoLeitura" required="true" data-invalid="CNPJ Inesxistente">
+                                            </div>
+                                            <hr>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="parametros" class="tab-pane fade">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-10">
+                                            <label for="RazaoSocial">Razão Social&nbsp;<span class="at-required-highlight"> *</span></label>
+                                            <div class="form-group">
+                                                <input type="text" name="empresa.RazaoSocial" id="field-1" required="true" class="form-control">
+                                            </div>
+
+                                            <hr>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-2">
+                                            <label for="dataAbertura">Data de abertura</label>
+                                            <div class="form-group">
+                                                <input type="text" name="empresa.DataAbertura" id="field-1-2" filter="date" class="form-control" data-invalid="Given value must be a valid date formated as 0000-00-00">
+                                            </div>
+                                            <hr>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 pull-right">
+                                    <input type="submit" id="btnEnvia" name="sub-1" value="Cadastrar" class="btn btn-primary">
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <script src="~/ScriptsJSAjax/Detalhes.js"></script>
+</div>
